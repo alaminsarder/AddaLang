@@ -1,0 +1,13 @@
+{
+  "name": "addalang",
+  "version": "2.0.0",
+  "description": "AddaLang: ekta Banglish toy programming language (lexer, parser, interpreter, browser playground)",
+  "main": "src/index.js",
+  "bin": { "adda": "bin/adda.js" },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "start": "node scripts/build.js && node scripts/serve.js",
+    "test": "node scripts/build.js && node --test test/*.test.js"
+  },
+  "engines": { "node": ">=18" }
+}

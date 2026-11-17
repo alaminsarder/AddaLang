@@ -10,9 +10,17 @@ Code likhle mone hobe adda dichho.
 ![Node.js](https://img.shields.io/badge/node-%3E%3D18-066B8A?style=for-the-badge&logo=node.js&logoColor=white)
 ![Version](https://img.shields.io/badge/version-2.0.0-27B5C4?style=for-the-badge)
 
-[Source code](https://github.com/alaminsarder/AddaLang) · [Developer](https://github.com/alaminsarder)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-addalang.vercel.app-0A9CA8?style=for-the-badge&logo=vercel&logoColor=white)](https://addalang.vercel.app/)
+
+[Live site](https://addalang.vercel.app/) · [Source code](https://github.com/alaminsarder/AddaLang) · [Developer](https://github.com/alaminsarder)
 
 </div>
+
+---
+
+## Live demo
+
+Install chhara browser-ei code likhe chalao: **https://addalang.vercel.app/**
 
 ---
 

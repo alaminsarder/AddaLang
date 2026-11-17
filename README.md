@@ -60,44 +60,6 @@ cd AddaLang
 npm install
 ```
 
-### CLI
-
-```
-node bin/adda.js examples/hello.adda
-```
-
-`adda` command hishebe chalate chaile:
-
-```
-npm link
-adda examples/hello.adda
-```
-
-Expected output:
-
-```
-dhap 1,2,4,5,6, shesh
-```
-
-### Web playground
-
-```
-npm run build
-node scripts/serve.js
-```
-
-Tarpor terminal-e je address dekhabe oita browser-e kholo.
-
-> `npm run build` `src/` theke `public/adda.js` toiri kore. Ei file hate edit korbe na.
-
-### Test
-
-```
-npm test
-```
-
----
-
 ## Project structure
 
 ```

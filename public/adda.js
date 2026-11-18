@@ -1,3 +1,4 @@
+// AddaLang browser bundle: scripts/build.js diye toiri. Eta hate edit koro na.
 (function (global) {
 "use strict";
 const __defs = {}, __cache = {};
@@ -21,7 +22,6 @@ module.exports = { AddaError };
 
 };
 __defs["lexer"] = function (module, exports, require) {
-// Dhap 1: source code-ke token-e bhag kora
 const { AddaError } = require('./errors');
 
 const KEYWORDS = new Set([
@@ -46,13 +46,11 @@ function tokenize(src, startLine = 1) {
     if (c === '\n') { line++; i++; continue; }
     if (/\s/.test(c)) { i++; continue; }
 
-    // comment: // ...
     if (c === '/' && src[i + 1] === '/') {
       while (i < src.length && src[i] !== '\n') i++;
       continue;
     }
 
-    // number
     if (isDigit(c)) {
       let j = i;
       while (isDigit(src[j])) j++;
@@ -64,8 +62,6 @@ function tokenize(src, startLine = 1) {
       i = j;
       continue;
     }
-
-    // string
     if (c === '"' || c === "'") {
       let j = i + 1;
       let s = '';
@@ -84,8 +80,6 @@ function tokenize(src, startLine = 1) {
       i = j + 1;
       continue;
     }
-
-    // identifier / keyword
     if (isAlpha(c)) {
       let j = i;
       while (isAlnum(src[j])) j++;
@@ -94,8 +88,6 @@ function tokenize(src, startLine = 1) {
       i = j;
       continue;
     }
-
-    // operators
     const two = src.slice(i, i + 2);
     if (TWO_CHAR.includes(two)) {
       tokens.push({ type: 'op', value: two, line });
@@ -119,7 +111,6 @@ module.exports = { tokenize };
 
 };
 __defs["parser"] = function (module, exports, require) {
-// Dhap 2: token theke AST (syntax tree) banano (recursive descent)
 const { AddaError } = require('./errors');
 
 const ASSIGN_OPS = ['=', '+=', '-=', '*=', '/='];
@@ -225,7 +216,6 @@ function parse(tokens) {
     return { type: 'ExprStmt', expr: e, line: t.line };
   }
 
-  // ---- expressions (precedence: niche theke upore) ----
   const binary = (sub, ops, type = 'Binary') => () => {
     let left = sub();
     while (peek().type === 'op' && ops.includes(peek().value)) {
@@ -273,7 +263,6 @@ module.exports = { parse };
 
 };
 __defs["interpreter"] = function (module, exports, require) {
-// Dhap 3: AST chalano (tree-walking interpreter)
 const { AddaError } = require('./errors');
 
 class BreakSignal {}
@@ -434,7 +423,6 @@ module.exports = { interpret };
 
 };
 __defs["index"] = function (module, exports, require) {
-// Public API: run(source) -> { ok, output, error }
 const { AddaError } = require('./errors');
 const { tokenize } = require('./lexer');
 const { parse } = require('./parser');

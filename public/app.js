@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-// AddaLang playground: interpreter browser-ei chole (adda.js), kono server lage na
->>>>>>> origin/main
 (function () {
   'use strict';
 
@@ -60,7 +56,6 @@ adda shesh`],
   }
   bolo "Mot dam:", dam, "taka";
 adda shesh`],
-<<<<<<< HEAD
     kaj: ['Kaj (function)',
 `adda shuru
   kaj jog(a, b) {
@@ -103,8 +98,6 @@ adda shesh`],
   bolo jora(tukro, " + ");
   bolo sonkhya("40") + 2, dhoron(naam);
 adda shesh`],
-=======
->>>>>>> origin/main
     bhul: ['Bhul dekho',
 `adda shuru
   dhoro a = 10;
@@ -119,13 +112,10 @@ adda shesh`],
     ['Output', '<code>bolo</code> diye jekono kichu print koro. Comma diye ekadhik jinis dewa jay. <code>//</code> diye comment lekha jay.', 'output'],
     ['Shorto', '<code>jodi</code> sotti hole block chole. Na hole <code>nahole jodi</code> ba <code>nahole</code> block chole. <code>&amp;&amp;</code>, <code>||</code>, <code>!</code> bebohar kora jay.', 'shorto'],
     ['Loop', '<code>jotokkhon</code> shorto thik thakbe totokkhon loop cholbe. <code>thamo</code> loop bhange, <code>porerta</code> porer dhape jay.', 'loop'],
-<<<<<<< HEAD
     ['Kaj (function)', '<code>kaj</code> diye nijer function banao, <code>ferot</code> diye value fire pao. Kaj nijeke nijei daktey pare (recursion), ar niche likhleo uporey dakha jay.', 'kaj'],
     ['Talika (list)', '<code>[1, 2, 3]</code> diye talika hoy. <code>talika[0]</code> diye dekho (position 0 theke shuru), <code>talika[0] = 5;</code> diye bodlao. <code>jogkoro</code>, <code>berkoro</code>, <code>doirgho</code>, <code>sajao</code>, <code>ulto</code>, <code>ache</code> cholbe.', 'talika'],
     ['Proti loop', '<code>proti (dhoro i = 0; i &lt; 5; i += 1)</code> diye gona loop, ar <code>proti (x moddhe talika)</code> diye talika ba lekha-r prottek ta dekha jay. <code>porisima(1, 6)</code> 1 theke 5 porjonto talika dey.', 'proti'],
     ['Lekha-r kaj', '<code>boro_hater</code>, <code>chhoto_hater</code>, <code>bhango</code>, <code>jora</code>, <code>sonkhya</code>, <code>lekha</code>, <code>dhoron</code> diye lekha ar type niye kaj kora jay. Sathe <code>borgomul</code>, <code>niche</code>, <code>upore</code>, <code>gol</code>, <code>porom</code>, <code>sorboccho</code>, <code>sornimno</code>, <code>random</code>.', 'lekha'],
-=======
->>>>>>> origin/main
     ['Bhul ar safety', 'Bhul hole output-er shathe line number dekha jay, editor-e oi line lal hoye jay. Loop kokhono shesh na hole interpreter nijei thame jay, tai browser hang hoy na.', 'bhul'],
   ];
 
@@ -133,15 +123,9 @@ adda shesh`],
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
 
   /* ---------- syntax highlight ---------- */
-<<<<<<< HEAD
   var KW = { dhoro: 1, bolo: 1, jodi: 1, nahole: 1, jotokkhon: 1, thamo: 1, porerta: 1, kaj: 1, ferot: 1, proti: 1, moddhe: 1 };
   var LIT = { thik: 1, bhul: 1, khali: 1 };
   var TOKEN = /(\/\/[^\n]*)|("(?:\\.|[^"\\\n])*"?|'(?:\\.|[^'\\\n])*'?)|(\badda[ \t]+(?:shuru|shesh)\b)|(\d+(?:\.\d+)?)|([A-Za-z_][A-Za-z0-9_]*)|(&&|\|\||[=!<>+\-*\/]=|[+\-*\/%<>=!])|([()\[\]{},;])/g;
-=======
-  var KW = { dhoro: 1, bolo: 1, jodi: 1, nahole: 1, jotokkhon: 1, thamo: 1, porerta: 1 };
-  var LIT = { thik: 1, bhul: 1, khali: 1 };
-  var TOKEN = /(\/\/[^\n]*)|("(?:\\.|[^"\\\n])*"?|'(?:\\.|[^'\\\n])*'?)|(\badda[ \t]+(?:shuru|shesh)\b)|(\d+(?:\.\d+)?)|([A-Za-z_][A-Za-z0-9_]*)|(&&|\|\||[=!<>+\-*\/]=|[+\-*\/%<>=!])|([(){},;])/g;
->>>>>>> origin/main
 
   function highlight(src) {
     var out = '', last = 0, m, cls;
@@ -212,7 +196,6 @@ adda shesh`],
   /* ---------- run ---------- */
   function showOutput(res, ms) {
     var html = '';
-<<<<<<< HEAD
     (res.output || []).forEach(function (l, i) {
       html += '<div class="ol" style="animation-delay:' + Math.min(i * 70, 1200) + 'ms">' + esc(l) + '</div>';
     });
@@ -221,12 +204,6 @@ adda shesh`],
       html += '<div class="errbox" role="alert"><span class="eb-ico" aria-hidden="true">!</span><div class="eb-body">' +
         '<div class="eb-title">Bhul' + (res.error.line ? '<span class="eb-line">line ' + res.error.line + '</span>' : '') + '</div>' +
         '<div class="eb-msg">' + esc(res.error.message) + '</div></div></div>';
-=======
-    (res.output || []).forEach(function (l) { html += '<div class="ol">' + esc(l) + '</div>'; });
-    if (!res.ok && res.error) {
-      var at = res.error.line ? ' (line ' + res.error.line + ')' : '';
-      html += '<div class="errbox"><b>Bhul' + at + ':</b> ' + esc(res.error.message) + '</div>';
->>>>>>> origin/main
       setErr(res.error.line);
       stat.textContent = 'Bhul hoyeche';
       stat.className = 'stat bad';
@@ -246,7 +223,6 @@ adda shesh`],
     catch (e) { res = { ok: false, output: [], error: { message: 'Ekta ochena bhul hoyeche', line: null } }; }
     showOutput(res, performance.now() - t0);
   }
-<<<<<<< HEAD
   function pulse() {
     runBtn.classList.remove('go');
     void runBtn.offsetWidth;
@@ -255,10 +231,6 @@ adda shesh`],
   function run() {
     var id = ++runId;
     pulse();
-=======
-  function run() {
-    var id = ++runId;
->>>>>>> origin/main
     if (mode === 'server') {
       runBtn.disabled = true;
       stat.textContent = 'Server-e chalche...'; stat.className = 'stat';
@@ -366,10 +338,6 @@ adda shesh`],
   if (location.hash.indexOf('#code=') === 0) {
     try { setCode(b64dec(location.hash.slice(6))); loaded = true; } catch (e) {}
   }
-<<<<<<< HEAD
   if (!loaded) pick('hello');
-=======
-  if (!loaded) pick('loop');
->>>>>>> origin/main
   run();
 })();

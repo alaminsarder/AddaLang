@@ -36,7 +36,6 @@ test('adda shuru chhara error', () => {
   assert.strictEqual(run('bolo 1;').ok, false);
 });
 
-<<<<<<< HEAD
 test('kaj ar ferot, recursion', () => {
   const r = run(wrap('kaj fib(n) { jodi (n < 2) { ferot n; } ferot fib(n - 1) + fib(n - 2); } bolo fib(10);'));
   assert.deepStrictEqual(r.output, ['55']);
@@ -98,8 +97,6 @@ test('ferot kaj-er baire bhul', () => {
   assert.strictEqual(run(wrap('ferot 1;')).ok, false);
 });
 
-=======
->>>>>>> origin/main
 test('browser bundle (public/adda.js) eki fol dey', () => {
   const vm = require('node:vm');
   const fs = require('node:fs');

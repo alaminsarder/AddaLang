@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // AddaLang browser bundle: scripts/build.js diye toiri. Eta hate edit koro na.
->>>>>>> origin/main
 (function (global) {
 "use strict";
 const __defs = {}, __cache = {};
@@ -30,16 +27,10 @@ const { AddaError } = require('./errors');
 const KEYWORDS = new Set([
   'dhoro', 'bolo', 'jodi', 'nahole', 'jotokkhon',
   'thamo', 'porerta', 'thik', 'bhul', 'khali',
-<<<<<<< HEAD
   'kaj', 'ferot', 'proti', 'moddhe',
 ]);
 const TWO_CHAR = ['==', '!=', '<=', '>=', '&&', '||', '+=', '-=', '*=', '/='];
 const ONE_CHAR = '+-*/%<>=!(){}[],;';
-=======
-]);
-const TWO_CHAR = ['==', '!=', '<=', '>=', '&&', '||', '+=', '-=', '*=', '/='];
-const ONE_CHAR = '+-*/%<>=!(){},;';
->>>>>>> origin/main
 const isDigit = (c) => c !== undefined && c >= '0' && c <= '9';
 const isAlpha = (c) => c !== undefined && /[A-Za-z_]/.test(c);
 const isAlnum = (c) => isAlpha(c) || isDigit(c);
@@ -169,7 +160,6 @@ function parse(tokens) {
     return { type: 'If', test, then, otherwise, line: t.line };
   }
 
-<<<<<<< HEAD
   function simpleNoSemi() {
     const t = peek();
     const after = tokens[p + 1];
@@ -235,8 +225,6 @@ function parse(tokens) {
     return { type: 'Func', name: id.value, params, body: block(), line: t.line };
   }
 
-=======
->>>>>>> origin/main
   function statement() {
     const t = peek();
     if (isOp('{')) return block();
@@ -268,7 +256,6 @@ function parse(tokens) {
           expectOp(')');
           return { type: 'While', test, body: block(), line: t.line };
         }
-<<<<<<< HEAD
         case 'proti':
           return forStatement();
         case 'kaj':
@@ -279,8 +266,6 @@ function parse(tokens) {
           expectOp(';');
           return { type: 'Return', value, line: t.line };
         }
-=======
->>>>>>> origin/main
         case 'thamo':
           next(); expectOp(';');
           return { type: 'Break', line: t.line };
@@ -303,14 +288,11 @@ function parse(tokens) {
     }
 
     const e = expr();
-<<<<<<< HEAD
     if (isOp('=') || ASSIGN_OPS.some((o) => isOp(o))) {
       const node = indexAssign(e, t);
       expectOp(';');
       return node;
     }
-=======
->>>>>>> origin/main
     expectOp(';');
     return { type: 'ExprStmt', expr: e, line: t.line };
   }
@@ -337,7 +319,6 @@ function parse(tokens) {
       const op = next();
       return { type: 'Unary', op: op.value, arg: unary(), line: op.line };
     }
-<<<<<<< HEAD
     return postfix();
   }
 
@@ -361,9 +342,6 @@ function parse(tokens) {
         return e;
       }
     }
-=======
-    return primary();
->>>>>>> origin/main
   }
 
   function primary() {
@@ -378,7 +356,6 @@ function parse(tokens) {
       expectOp(')');
       return e;
     }
-<<<<<<< HEAD
     if (t.type === 'op' && t.value === '[') {
       const items = [];
       if (!isOp(']')) {
@@ -387,8 +364,6 @@ function parse(tokens) {
       expectOp(']');
       return { type: 'List', items, line: t.line };
     }
-=======
->>>>>>> origin/main
     fail(`Expression ashha korechilam, kintu peyechi '${t.value}'`, t);
   }
 
@@ -403,13 +378,10 @@ const { AddaError } = require('./errors');
 
 class BreakSignal {}
 class ContinueSignal {}
-<<<<<<< HEAD
 class ReturnSignal { constructor(value) { this.value = value; } }
 
 const MAX_DEPTH = 150;
 const MAX_RANGE = 100000;
-=======
->>>>>>> origin/main
 
 class Env {
   constructor(parent = null) { this.parent = parent; this.vars = new Map(); }
@@ -433,16 +405,12 @@ class Env {
   }
 }
 
-<<<<<<< HEAD
 const isFn = (v) => v !== null && typeof v === 'object' && (v.kind === 'fn' || v.kind === 'native');
 
-=======
->>>>>>> origin/main
 function show(v) {
   if (v === true) return 'thik';
   if (v === false) return 'bhul';
   if (v === null || v === undefined) return 'khali';
-<<<<<<< HEAD
   if (Array.isArray(v)) return '[' + v.map((x) => (typeof x === 'string' ? JSON.stringify(x) : show(x))).join(', ') + ']';
   if (isFn(v)) return `<kaj ${v.name}>`;
   return String(v);
@@ -549,20 +517,11 @@ function makeBuiltins() {
   def('dhoron', 1, ([x]) => typeName(x));
   return env;
 }
-=======
-  return String(v);
-}
-
-const truthy = (v) => !(v === null || v === false || v === 0 || v === '');
->>>>>>> origin/main
 
 function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
   const output = [];
   let steps = 0;
-<<<<<<< HEAD
   let depth = 0;
-=======
->>>>>>> origin/main
   const tick = (line) => {
     if (++steps > maxSteps) throw new AddaError('Onek beshi dhap hoye gelo, loop shesh hocche na?', line);
   };
@@ -576,10 +535,7 @@ function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
   function binop(op, a, b, line) {
     switch (op) {
       case '+':
-<<<<<<< HEAD
         if (Array.isArray(a) && Array.isArray(b)) return [...a, ...b];
-=======
->>>>>>> origin/main
         if (typeof a === 'string' || typeof b === 'string') return show(a) + show(b);
         num(op, a, b, line); return a + b;
       case '-': num(op, a, b, line); return a - b;
@@ -602,7 +558,6 @@ function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
     throw new AddaError(`Unknown operator '${op}'`, line);
   }
 
-<<<<<<< HEAD
   function checkIndex(obj, idx, line) {
     if (typeof obj !== 'string' && !Array.isArray(obj)) {
       throw new AddaError('Position diye dekha jay sudhu lekha ba talika-te', line);
@@ -661,11 +616,6 @@ function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
         const args = n.args.map((a) => evaluate(a, env));
         return callFunction(fn, args, n.line);
       }
-=======
-  function evaluate(n, env) {
-    switch (n.type) {
-      case 'Literal': return n.value;
->>>>>>> origin/main
       case 'Var': return env.get(n.name, n.line);
       case 'Unary': {
         const v = evaluate(n.arg, env);
@@ -684,7 +634,6 @@ function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
     throw new AddaError(`Unknown expression '${n.type}'`);
   }
 
-<<<<<<< HEAD
   function execBody(body, env) {
     for (const s of body) {
       if (s.type === 'Func') env.define(s.name, { kind: 'fn', name: s.name, params: s.params, body: s.body, closure: env }, s.line);
@@ -743,14 +692,6 @@ function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
       case 'Block': {
         const inner = new Env(env);
         execBody(n.body, inner);
-=======
-  function exec(n, env) {
-    switch (n.type) {
-      case 'Program': n.body.forEach((s) => exec(s, env)); return;
-      case 'Block': {
-        const inner = new Env(env);
-        n.body.forEach((s) => exec(s, inner));
->>>>>>> origin/main
         return;
       }
       case 'Let': tick(n.line); env.define(n.name, evaluate(n.init, env), n.line); return;
@@ -793,7 +734,6 @@ function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
   }
 
   try {
-<<<<<<< HEAD
     exec(ast, new Env(makeBuiltins()));
   } catch (e) {
     if (e instanceof ReturnSignal) {
@@ -801,10 +741,6 @@ function interpret(ast, { maxSteps = 200000, maxOutput = 1000, onPrint } = {}) {
       err.partialOutput = output;
       throw err;
     }
-=======
-    exec(ast, new Env());
-  } catch (e) {
->>>>>>> origin/main
     if (e instanceof BreakSignal || e instanceof ContinueSignal) {
       const err = new AddaError("'thamo' / 'porerta' sudhu loop-er bhetore cholbe");
       err.partialOutput = output;

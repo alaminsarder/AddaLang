@@ -1,0 +1,15 @@
+adda shuru
+  kaj boro(a, b) {
+    jodi (a > b) { ferot a; }
+    ferot b;
+  }
+
+  dhoro number = [4, 9, 2, 7];
+  dhoro sera = 0;
+  proti (n moddhe number) {
+    sera = boro(sera, n);
+  }
+  bolo "Number:", number;
+  bolo "Sobcheye boro:", sera;
+  bolo "Sajano:", sajao(number);
+adda shesh

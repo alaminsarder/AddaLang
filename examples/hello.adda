@@ -1,0 +1,11 @@
+adda shuru
+  // 1 theke 10 porjonto, 3 chhere, 7-e thamo
+  dhoro i = 0;
+  jotokkhon (i < 10) {
+    i += 1;
+    jodi (i == 3) { porerta; }
+    jodi (i == 7) { thamo; }
+    bolo "dhap", i;
+  }
+  bolo "shesh";
+adda shesh

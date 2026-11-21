@@ -6,7 +6,11 @@ const root = path.join(__dirname, '..');
 const pub = path.join(root, 'public');
 const types = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
+<<<<<<< HEAD
   '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.json': 'application/json',
+=======
+  '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.json': 'application/json',
+>>>>>>> origin/main
 };
 
 function api(name, req, res) {

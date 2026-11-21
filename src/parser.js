@@ -46,6 +46,7 @@ function parse(tokens) {
     return { type: 'If', test, then, otherwise, line: t.line };
   }
 
+<<<<<<< HEAD
   function simpleNoSemi() {
     const t = peek();
     const after = tokens[p + 1];
@@ -111,6 +112,8 @@ function parse(tokens) {
     return { type: 'Func', name: id.value, params, body: block(), line: t.line };
   }
 
+=======
+>>>>>>> origin/main
   function statement() {
     const t = peek();
     if (isOp('{')) return block();
@@ -142,6 +145,7 @@ function parse(tokens) {
           expectOp(')');
           return { type: 'While', test, body: block(), line: t.line };
         }
+<<<<<<< HEAD
         case 'proti':
           return forStatement();
         case 'kaj':
@@ -152,6 +156,8 @@ function parse(tokens) {
           expectOp(';');
           return { type: 'Return', value, line: t.line };
         }
+=======
+>>>>>>> origin/main
         case 'thamo':
           next(); expectOp(';');
           return { type: 'Break', line: t.line };
@@ -174,11 +180,14 @@ function parse(tokens) {
     }
 
     const e = expr();
+<<<<<<< HEAD
     if (isOp('=') || ASSIGN_OPS.some((o) => isOp(o))) {
       const node = indexAssign(e, t);
       expectOp(';');
       return node;
     }
+=======
+>>>>>>> origin/main
     expectOp(';');
     return { type: 'ExprStmt', expr: e, line: t.line };
   }
@@ -205,6 +214,7 @@ function parse(tokens) {
       const op = next();
       return { type: 'Unary', op: op.value, arg: unary(), line: op.line };
     }
+<<<<<<< HEAD
     return postfix();
   }
 
@@ -228,6 +238,9 @@ function parse(tokens) {
         return e;
       }
     }
+=======
+    return primary();
+>>>>>>> origin/main
   }
 
   function primary() {
@@ -242,6 +255,7 @@ function parse(tokens) {
       expectOp(')');
       return e;
     }
+<<<<<<< HEAD
     if (t.type === 'op' && t.value === '[') {
       const items = [];
       if (!isOp(']')) {
@@ -250,6 +264,8 @@ function parse(tokens) {
       expectOp(']');
       return { type: 'List', items, line: t.line };
     }
+=======
+>>>>>>> origin/main
     fail(`Expression ashha korechilam, kintu peyechi '${t.value}'`, t);
   }
 

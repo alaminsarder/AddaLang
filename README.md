@@ -38,6 +38,7 @@ Install chhara browser-ei code likhe chalao: **https://addalang.vercel.app/**
 | `bolo` | Output dekhano. Comma diye onek kichu dewa jay |
 | `jodi` / `nahole jodi` / `nahole` | Shorto mille ki hobe, na mille ki hobe |
 | `jotokkhon` | Shorto thik thakle loop cholbe |
+<<<<<<< HEAD
 | `proti` / `moddhe` | Gona loop: `proti (dhoro i = 0; i < 5; i += 1)`, ba prottek ta dhore: `proti (x moddhe talika)` |
 | `kaj` / `ferot` | Function banano ar value fera. Recursion cholbe, niche likhleo uporey dakha jay |
 | `[ ]` | Talika (list): `[1, 2, 3]`, `a[0]`, `a[0] = 5;` |
@@ -63,6 +64,11 @@ adda shuru
 adda shesh
 ```
 
+=======
+| `thamo` / `porerta` | Loop bhango, ba ei dhap chhere porer dhape jao |
+| `thik` / `bhul` / `khali` | Sotti, mittha, ar kichui na |
+
+>>>>>>> origin/main
 ### Operator
 
 | Dhoron | Operator |
@@ -90,7 +96,11 @@ npm install
 addalang/
 ├── api/          health.js, run.js
 ├── bin/          adda.js (CLI)
+<<<<<<< HEAD
 ├── examples/     hello.adda, talika.adda
+=======
+├── examples/     hello.adda
+>>>>>>> origin/main
 ├── public/       index.html, style.css, app.js, adda.js (generated)
 ├── scripts/      build.js, serve.js
 ├── src/          lexer, parser, interpreter, errors, index

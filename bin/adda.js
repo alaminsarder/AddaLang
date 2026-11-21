@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 
+=======
+#!/usr/bin/env node
+// CLI: node bin/adda.js examples/hello.adda
+>>>>>>> origin/main
 const fs = require('fs');
 const { run } = require('../src/index');
 

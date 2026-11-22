@@ -1,12 +1,6 @@
 const { AddaError } = require('./errors');
 
-const KEYWORDS = new Set([
-  'dhoro', 'bolo', 'jodi', 'nahole', 'jotokkhon',
-  'thamo', 'porerta', 'thik', 'bhul', 'khali',
-  'kaj', 'ferot', 'proti', 'moddhe',
-]);
-const TWO_CHAR = ['==', '!=', '<=', '>=', '&&', '||', '+=', '-=', '*=', '/='];
-const ONE_CHAR = '+-*/%<>=!(){}[],;';
+const { KEYWORDS, TWO_CHAR_OPS: TWO_CHAR, ONE_CHAR_OPS: ONE_CHAR } = require('./mapping');
 const isDigit = (c) => c !== undefined && c >= '0' && c <= '9';
 const isAlpha = (c) => c !== undefined && /[A-Za-z_]/.test(c);
 const isAlnum = (c) => isAlpha(c) || isDigit(c);

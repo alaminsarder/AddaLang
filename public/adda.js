@@ -21,16 +21,80 @@ class AddaError extends Error {
 module.exports = { AddaError };
 
 };
+__defs["mapping"] = function (module, exports, require) {
+const KEYWORD_MAP = {
+  dhoro: 'let',
+  bolo: 'print',
+  jodi: 'if',
+  nahole: 'else',
+  jotokkhon: 'while',
+  proti: 'for',
+  moddhe: 'in',
+  kaj: 'function',
+  ferot: 'return',
+  thamo: 'break',
+  porerta: 'continue',
+  thik: 'true',
+  bhul: 'false',
+  khali: 'null',
+};
+
+const KEYWORDS = new Set(Object.keys(KEYWORD_MAP));
+
+// thik / bhul / khali: keyword, kintu expression-er value
+const LITERAL_MAP = { thik: true, bhul: false, khali: null };
+const LITERAL_KW = Object.keys(LITERAL_MAP);
+
+const TWO_CHAR_OPS = ['==', '!=', '<=', '>=', '&&', '||', '+=', '-=', '*=', '/='];
+const ONE_CHAR_OPS = '+-*/%<>=!(){}[],;';
+const ASSIGN_OPS = ['=', '+=', '-=', '*=', '/='];
+
+// Program-er shuru ar shesh
+const PROGRAM_START = 'shuru';
+const PROGRAM_END = 'shesh';
+const PROGRAM_WORD = 'adda';
+
+module.exports = {
+  KEYWORD_MAP, KEYWORDS, LITERAL_MAP, LITERAL_KW,
+  TWO_CHAR_OPS, ONE_CHAR_OPS, ASSIGN_OPS,
+  PROGRAM_WORD, PROGRAM_START, PROGRAM_END,
+};
+
+};
+__defs["preprocessor"] = function (module, exports, require) {
+const { AddaError } = require('./errors');
+const { PROGRAM_WORD, PROGRAM_START, PROGRAM_END } = require('./mapping');
+
+// Preprocessor: lexer-er age source-ke porishkar kore.
+// 1. BOM soriye dey, CRLF/CR ke LF kore (line sonkhya ager moto thake)
+// 2. 'adda shuru' ... 'adda shesh'-er bhetorer code ber kore, baire ja ache ignore
+// 3. Code ar tar shuru line number fera dey, jate error-e thik line dekhano jay
+function normalize(source) {
+  return String(source).replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+}
+
+function extractProgram(source) {
+  const re = new RegExp(`\\b${PROGRAM_WORD}\\s+${PROGRAM_START}\\b([\\s\\S]*?)\\b${PROGRAM_WORD}\\s+${PROGRAM_END}\\b`);
+  const m = re.exec(source);
+  if (!m) {
+    throw new AddaError(`Program '${PROGRAM_WORD} ${PROGRAM_START}' diye shuru ar '${PROGRAM_WORD} ${PROGRAM_END}' diye shesh korte hobe`);
+  }
+  const bodyStart = m.index + m[0].indexOf(m[1]);
+  const startLine = source.slice(0, bodyStart).split('\n').length;
+  return { code: m[1], startLine };
+}
+
+function preprocess(source) {
+  return extractProgram(normalize(source));
+}
+
+module.exports = { preprocess, normalize, extractProgram };
+
+};
 __defs["lexer"] = function (module, exports, require) {
 const { AddaError } = require('./errors');
 
-const KEYWORDS = new Set([
-  'dhoro', 'bolo', 'jodi', 'nahole', 'jotokkhon',
-  'thamo', 'porerta', 'thik', 'bhul', 'khali',
-  'kaj', 'ferot', 'proti', 'moddhe',
-]);
-const TWO_CHAR = ['==', '!=', '<=', '>=', '&&', '||', '+=', '-=', '*=', '/='];
-const ONE_CHAR = '+-*/%<>=!(){}[],;';
+const { KEYWORDS, TWO_CHAR_OPS: TWO_CHAR, ONE_CHAR_OPS: ONE_CHAR } = require('./mapping');
 const isDigit = (c) => c !== undefined && c >= '0' && c <= '9';
 const isAlpha = (c) => c !== undefined && /[A-Za-z_]/.test(c);
 const isAlnum = (c) => isAlpha(c) || isDigit(c);
@@ -114,8 +178,7 @@ module.exports = { tokenize };
 __defs["parser"] = function (module, exports, require) {
 const { AddaError } = require('./errors');
 
-const ASSIGN_OPS = ['=', '+=', '-=', '*=', '/='];
-const LITERAL_KW = ['thik', 'bhul', 'khali'];
+const { ASSIGN_OPS, LITERAL_KW, LITERAL_MAP } = require('./mapping');
 
 function parse(tokens) {
   let p = 0;
@@ -348,7 +411,7 @@ function parse(tokens) {
     const t = next();
     if (t.type === 'num' || t.type === 'str') return { type: 'Literal', value: t.value };
     if (t.type === 'kw' && LITERAL_KW.includes(t.value)) {
-      return { type: 'Literal', value: t.value === 'thik' ? true : t.value === 'bhul' ? false : null };
+      return { type: 'Literal', value: LITERAL_MAP[t.value] };
     }
     if (t.type === 'id') return { type: 'Var', name: t.value, line: t.line };
     if (t.type === 'op' && t.value === '(') {
@@ -758,20 +821,13 @@ module.exports = { interpret };
 __defs["index"] = function (module, exports, require) {
 const { AddaError } = require('./errors');
 const { tokenize } = require('./lexer');
+const { preprocess } = require('./preprocessor');
 const { parse } = require('./parser');
 const { interpret } = require('./interpreter');
 
-function extractProgram(source) {
-  const m = /\badda\s+shuru\b([\s\S]*?)\badda\s+shesh\b/.exec(source);
-  if (!m) throw new AddaError("Program 'adda shuru' diye shuru ar 'adda shesh' diye shesh korte hobe");
-  const bodyStart = m.index + m[0].indexOf(m[1]);
-  const startLine = source.slice(0, bodyStart).split('\n').length;
-  return { code: m[1], startLine };
-}
-
 function run(source, options = {}) {
   try {
-    const { code, startLine } = extractProgram(String(source));
+    const { code, startLine } = preprocess(source);
     const ast = parse(tokenize(code, startLine));
     const output = interpret(ast, options);
     return { ok: true, output, error: null };

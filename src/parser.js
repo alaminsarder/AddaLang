@@ -1,7 +1,6 @@
 const { AddaError } = require('./errors');
 
-const ASSIGN_OPS = ['=', '+=', '-=', '*=', '/='];
-const LITERAL_KW = ['thik', 'bhul', 'khali'];
+const { ASSIGN_OPS, LITERAL_KW, LITERAL_MAP } = require('./mapping');
 
 function parse(tokens) {
   let p = 0;
@@ -234,7 +233,7 @@ function parse(tokens) {
     const t = next();
     if (t.type === 'num' || t.type === 'str') return { type: 'Literal', value: t.value };
     if (t.type === 'kw' && LITERAL_KW.includes(t.value)) {
-      return { type: 'Literal', value: t.value === 'thik' ? true : t.value === 'bhul' ? false : null };
+      return { type: 'Literal', value: LITERAL_MAP[t.value] };
     }
     if (t.type === 'id') return { type: 'Var', name: t.value, line: t.line };
     if (t.type === 'op' && t.value === '(') {

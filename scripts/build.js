@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '..');
-const order = ['errors', 'lexer', 'parser', 'interpreter', 'index'];
+const order = ['errors', 'mapping', 'preprocessor', 'lexer', 'parser', 'interpreter', 'index'];
 
 let out = '// AddaLang browser bundle: scripts/build.js diye toiri. Eta hate edit koro na.\n';
 out += '(function (global) {\n"use strict";\nconst __defs = {}, __cache = {};\n';

@@ -107,3 +107,30 @@ test('browser bundle (public/adda.js) eki fol dey', () => {
   const r = ctx.AddaLang.run(wrap('bolo "Jog:", 5 + 7 * 2;'));
   assert.deepStrictEqual(Array.from(r.output), ['Jog: 19']);
 });
+
+// --- preprocessor ar mapping ---
+const { preprocess } = require('../src/preprocessor');
+const mapping = require('../src/mapping');
+
+test('preprocessor: CRLF ar BOM, line number thik thake', () => {
+  const src = '\uFEFFadda shuru\r\nbolo 1;\r\nbolo x;\r\nadda shesh';
+  const r = run(src);
+  assert.strictEqual(r.ok, false);
+  assert.strictEqual(r.error.line, 3);
+});
+
+test('preprocessor: adda shuru/shesh-er baire ignore, startLine thik', () => {
+  const { code, startLine } = preprocess('ja khushi\nadda shuru\nbolo 1;\nadda shesh\nabar jaa khushi');
+  assert.strictEqual(code.trim(), 'bolo 1;');
+  assert.strictEqual(startLine, 2);
+});
+
+test('preprocessor: adda shuru na thakle error', () => {
+  assert.throws(() => preprocess('bolo 1;'), /adda shuru/);
+});
+
+test('mapping: keyword ar literal', () => {
+  assert.ok(mapping.KEYWORDS.has('dhoro'));
+  assert.strictEqual(mapping.KEYWORD_MAP.jodi, 'if');
+  assert.deepStrictEqual(mapping.LITERAL_MAP, { thik: true, bhul: false, khali: null });
+});

@@ -93,7 +93,7 @@ addalang/
 â”œâ”€â”€ examples/     hello.adda, talika.adda
 â”œâ”€â”€ public/       index.html, style.css, app.js, adda.js (generated)
 â”œâ”€â”€ scripts/      build.js, serve.js
-â”œâ”€â”€ src/          lexer, parser, interpreter, errors, index
+â”œâ”€â”€ src/          preprocessor, mapping, lexer, parser, interpreter, errors, index
 â”œâ”€â”€ test/         adda.test.js, api.test.js
 â””â”€â”€ package.json
 ```
@@ -102,10 +102,12 @@ addalang/
 
 ## Kibhabe kaj kore
 
-1. **Lexer** source code ke token-e bhange
-2. **Parser** token theke syntax tree banay
-3. **Interpreter** oi tree chalay
-4. **Errors** kono bhul thakle line shoho message dey
+1. **Preprocessor** source porishkar kore (BOM, CRLF) ar `adda shuru` / `adda shesh`-er bhetorer code ber kore
+2. **Mapping** keyword, literal ar operator-er talika ek jayegay rakhe
+3. **Lexer** (tokenization) code ke token-e bhange
+4. **Parser** token theke syntax tree banay
+5. **Interpreter** oi tree chalay
+6. **Errors** kono bhul thakle line shoho message dey
 
 CLI ar browser playground dutoi ek-i engine use kore.
 

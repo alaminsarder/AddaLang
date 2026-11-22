@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-// CLI: node bin/adda.js examples/hello.adda
 const fs = require('fs');
 const { run } = require('../src/index');
 

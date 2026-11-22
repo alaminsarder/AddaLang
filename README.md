@@ -6,7 +6,7 @@
 
 Code likhle mone hobe adda dichho.
 
-[Live site](https://addalang.vercel.app/) Â· [Source code](https://github.com/alaminsarder/AddaLang) Â· [Developer](https://github.com/alaminsarder)
+[Live site](https://addalang.vercel.app/) · [Source code](https://github.com/alaminsarder/AddaLang) · [Developer](https://github.com/alaminsarder)
 
 </div>
 
@@ -88,14 +88,14 @@ npm install
 
 ```
 addalang/
-â”œâ”€â”€ api/          health.js, run.js
-â”œâ”€â”€ bin/          adda.js (CLI)
-â”œâ”€â”€ examples/     hello.adda, talika.adda
-â”œâ”€â”€ public/       index.html, style.css, app.js, adda.js (generated)
-â”œâ”€â”€ scripts/      build.js, serve.js
-â”œâ”€â”€ src/          preprocessor, mapping, lexer, parser, interpreter, errors, index
-â”œâ”€â”€ test/         adda.test.js, api.test.js
-â””â”€â”€ package.json
+├── api/          health.js, run.js
+├── bin/          adda.js (CLI)
+├── examples/     hello.adda, talika.adda
+├── public/       index.html, style.css, app.js, adda.js (generated)
+├── scripts/      build.js, serve.js
+├── src/          preprocessor, mapping, lexer, parser, interpreter, errors, index
+├── test/         adda.test.js, api.test.js
+└── package.json
 ```
 
 ---
@@ -117,6 +117,6 @@ CLI ar browser playground dutoi ek-i engine use kore.
 
 Developed by [**AL Amin Sarder**](https://github.com/alaminsarder)
 
-Â© 2026 AddaLang. All rights reserved.
+© 2026 AddaLang. All rights reserved.
 
 </div>

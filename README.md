@@ -32,7 +32,7 @@ Install chhara browser-ei code likhe chalao: **https://addalang.vercel.app/**
 ## Keywords
 
 | Keyword | Kaj |
-
+| --- | --- |
 | `adda shuru` / `adda shesh` | Program shuru ar shesh. Er baire ja thakbe ignore hobe |
 | `dhoro` | Notun variable banano |
 | `bolo` | Output dekhano. Comma diye onek kichu dewa jay |

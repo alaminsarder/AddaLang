@@ -98,7 +98,7 @@ addalang/
 └── package.json
 ```
 
----
+
 
 ## Kibhabe kaj kore
 
